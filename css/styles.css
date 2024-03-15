@@ -1,0 +1,93 @@
+@import url(variables.css);
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background: var(--color-body);
+}
+
+.header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 60px;
+    padding-right: 30px;
+    padding-top: 20px ;
+}
+
+.titulo h1{
+    color: var(--color-primary);
+}
+
+
+.menu ul{
+    display: flex;
+    flex-direction:row;
+    
+}
+.menu li{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--color-secundary);
+    padding: 20px;
+    text-decoration: none;
+    list-style: none;
+}
+
+.menu ul li:first-child{
+    border: 1px solid green;
+    width: 45px;
+    height: 15px;
+}
+
+.containerBody{
+    height: 70vh;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+    grid-template-areas: 
+    "full imagenFull"
+    ;
+
+}
+
+.fullWebsite{
+    grid-area: full;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.imgHome{
+    grid-area: imagenFull;
+}
+
+.bannerFull{
+    width: 100%;
+    border: 1px solid white;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 100px;
+}
+
+.bannerFull h1{
+    margin-left: 160px;
+    color: var(--color-primary);
+    font-size: 70px;
+}
+
+/* .bannerFull {
+
+} */
+.imgHamburguesaHome img{
+    margin-top: 50px;
+    margin-left: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 50%;
+}
