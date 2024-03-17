@@ -3,8 +3,12 @@
 *{
     margin: 0;
     padding: 0;
-    font-family: 'Poppins', sans-serif;
+    
+}
+
+body{
     background: var(--color-body);
+    font-family: 'Poppins', sans-serif;
 }
 
 .header{
@@ -14,10 +18,12 @@
     padding-left: 60px;
     padding-right: 30px;
     padding-top: 20px ;
+    background: var(--color-body);
 }
 
 .titulo h1{
     color: var(--color-primary);
+    padding: 10px;
 }
 
 
@@ -71,7 +77,7 @@
 }
 
 .bannerFull{
-    margin-top: 5em;
+    margin-top: 2em;
     margin-left: 10em;
     width: 100vh;
     display: flex;
@@ -150,13 +156,13 @@
     margin-right: 100px;
 }
 .box_aboutUs h4{
-    font-size: 25px;
+    font-size: 22px;
     color: var(--color-primary);
     margin-bottom: 10px;
 }
 
 .box_aboutUs h1{
-    font-size: 50px;
+    font-size: 52px;
     color: var(--color-secundary);
     margin-bottom: 20px;
 }
@@ -176,3 +182,95 @@
     font-size: 15px;
     font-weight: bold;
 }
+
+/* PAGE MENU */
+
+.foodMenuPage{
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-areas: 
+    "bannerMenu"
+    "boxesMenu"
+    ;
+}
+
+.banner_foodMenu{
+    grid-area: bannerMenu;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 10vh;
+}
+
+.banner_foodMenu h3{
+    color: var(--color-primary);
+    font-size: 4vh;
+    margin-bottom: 3vh;
+    margin-top: 10vh;
+}
+
+.banner_foodMenu h1{
+    color: var(--color-secundary);
+    font-size: 8vh;
+}
+
+.boxes_foodMenu{
+    grid-area: boxesMenu;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15vh;
+}
+
+.boxes_foodMenu .box_foodMenu{
+    width: 20em;
+    height: 20em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+    background: var(--color-quinto);
+    overflow: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    overflow: -moz-scrollbars-none;
+}
+
+
+.boxes_foodMenu .box_foodMenu img{
+    width: 70%;
+    height: 70%;
+}
+
+.box_foodMenu:nth-child(3) img {
+    width: 60%;
+    height: 60%;
+    margin-bottom: 30px;
+}
+
+.text_foodMenu{
+    display: flex;
+    flex-direction: column;
+    align-items: center ;
+}
+
+.text_foodMenu h4{
+    
+    font-size: 1.3em;
+}
+
+.text_foodMenu h5{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 1em;
+}
+
+.text_foodMenu h6{
+    font-size: .8em;
+    color: var(--color-primary);
+}
+
