@@ -363,7 +363,7 @@ body{
 }
 
 .box_contact{
-    height: 100vh;
+    height: 120vh;
     grid-area: contact;
     display: flex;
     align-items: center;
@@ -401,5 +401,91 @@ body{
 .footer{
     display: flex;
     flex-direction: row;
+    justify-content: center;
+}
+.box_footer{
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    margin: 8px;
+    width: 30vh;
+    height: 30vh;
+}  
+
+
+.menufooter ul{
+    margin-top: 2.5vh;
+    text-align: left;
+}
+
+.menufooter ul li{
+    color: var(--color-secundary);
+    font-size: 1.1em;
+    list-style: none;
+
+}
+
+.title_footer{
+    font-size: 1.6em;
+    color: var(--color-secundary);
+    border-bottom: 2px solid var(--color-primary);
+}
+
+.menufooter .box_icon{
+    display: flex;
+}
+.menufooter .box_icon i{
+    margin: 2px;
+    background: var(--color-primary);
+    border-radius:100%;
+    width: 1.7em;
+    height: 1.7em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (width < 600px){
+    *{
+        margin: 0;
+        padding: 0;
+    }
+
+    .containerBody{
+        padding: 10vh;
+        height: 100vh;
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(2, 1fr);
+        grid-template-areas: 
+        "full"
+        "imagenFull"
+        ;
+    }
+
+    .bannerFull{
+        background:red;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .imgHome{
+        padding: 0;
+        background: blue;
+        width: 100vh;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 0;
+        margin-top: 0;
+    }
+
+    .imgHamburguesaHome{
+        
+    }
+
 }
 
