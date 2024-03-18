@@ -12,22 +12,25 @@ body{
 }
 
 .header{
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding-left: 60px;
-    padding-right: 30px;
     padding-top: 20px ;
     background: var(--color-body);
+    position:fixed;
 }
 
 .titulo h1{
+    font-size: 2.5em;
     color: var(--color-primary);
-    padding: 10px;
+    margin-top: 2vh;
+    margin-left: 10vh;
 }
 
 
 .menu ul{
+    margin-right: 2vh;
     display: flex;
     flex-direction:row;
 
@@ -49,11 +52,13 @@ body{
 }
 
 .menu ul li a{
+    font-size: 1.2em;
     text-decoration: none;
     color: var(--color-secundary);
 }
 
 .containerBody{
+    padding: 10vh;
     height: 100vh;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -77,9 +82,8 @@ body{
 }
 
 .bannerFull{
-    margin-top: 2em;
-    margin-left: 10em;
-    width: 100vh;
+    margin-left: 18vh;
+    width: 85vh;
     display: flex;
     flex-direction: column;
     margin-bottom: 100px;
@@ -108,7 +112,8 @@ body{
 }
 
 .imgHamburguesaHome img{
-    margin-top: 50px;
+    margin-top: 10vh;
+    margin-left: 5vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -139,8 +144,8 @@ body{
 
 .img_aboutUs img{
     margin-left: 5em;
-    height: 65%;
-    width: 65%;
+    height: 55%;
+    width: 55%;
 }
 
 .banner_aboutUs{
@@ -207,9 +212,9 @@ body{
 
 .banner_foodMenu h3{
     color: var(--color-primary);
-    font-size: 4vh;
+    font-size: 2em;
     margin-bottom: 3vh;
-    margin-top: 10vh;
+    margin-top: 15vh;
 }
 
 .banner_foodMenu h1{
@@ -274,3 +279,73 @@ body{
     color: var(--color-primary);
 }
 
+/* SERVICE PAGE */
+
+.servicesPage{
+    height: 70vh;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-areas: 
+    "services services services"
+    "box box box"
+    ;
+}
+
+
+.banner_service{
+    height: 40vh;
+    grid-area: services;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.banner_service h3{
+    margin-top: 7vh;
+    margin-bottom: 4vh;
+    font-size: 1.5em;
+    color: var(--color-primary);
+}
+
+
+.banner_service h1{
+    font-size: 3em;
+    color: var(--color-secundary);
+}
+
+.boxes_services{
+    height: 60vh;
+    grid-area: box;
+    display: flex;
+    justify-content: center;
+    
+}
+
+.box_services{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 55vh;
+    width: 50vh;
+    margin: 2vh;
+}
+
+.box_services img{
+    width: 30vh;
+    height: 30vh;
+}
+
+.box_services h3{
+    color: var(--color-primary);
+    font-size: 2em;
+    margin-top: 2vh;
+    margin-bottom: 3vh;
+}
+
+.box_services h4{
+    font-size: 1.4em;
+    text-align: center;
+    color: var(--color-secundary);
+}
