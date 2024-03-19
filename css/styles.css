@@ -21,11 +21,15 @@ body{
     position:fixed;
 }
 
-.titulo h1{
+.titulo_header h1{
     font-size: 2.5em;
     color: var(--color-primary);
     margin-top: 2vh;
     margin-left: 10vh;
+}
+
+.openMenu{
+    display: none;
 }
 
 
@@ -58,7 +62,6 @@ body{
 }
 
 .containerBody{
-    padding: 10vh;
     height: 100vh;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -158,7 +161,6 @@ body{
 
 .box_aboutUs{
     width: 500px;
-    margin-right: 100px;
 }
 .box_aboutUs h4{
     font-size: 22px;
@@ -358,12 +360,13 @@ body{
     grid-template-rows: 1fr;
     grid-template-areas: 
     "contact "
-    "contact"
     ;
 }
 
 .box_contact{
-    height: 120vh;
+
+    width: 100%;
+    height: 50vh;
     grid-area: contact;
     display: flex;
     align-items: center;
@@ -371,14 +374,16 @@ body{
 }
 
 .banner_contact{
-    border: 1px solid white;
+    width: 80%;
+    height: 50vh;
+    margin-top: 50vh;
     background: var(--color-quinto);
-    width: 150vh;
-    height: 45vh;
     display: flex;
-    align-items: center;
     flex-direction: column;
+    align-items: center;
     justify-content: center;
+
+    
 }
 
 .banner_contact h1{
@@ -446,13 +451,38 @@ body{
 }
 
 @media (width < 600px){
-    *{
-        margin: 0;
-        padding: 0;
+    
+
+    .main{
+        width: 100%;
+
+    }
+    .header{
+        width: 100%;
+        padding-top: 0;
+        position: fixed;
+        
+    }
+    .openMenu{
+        border: 1px solid white;
     }
 
+    .titulo_header h1{
+        font-size: 1.6em;
+        margin-left: 0;
+        margin-top: 0;
+        padding: 3vh;
+    }
+
+    .menu{
+        display: none;
+    }
+
+    /* MAINPAGE PHONE */
     .containerBody{
-        padding: 10vh;
+        width: 100%;
+        margin-top: 0;
+        margin-right: 0;
         height: 100vh;
         grid-template-columns: 1fr;
         grid-template-rows: repeat(2, 1fr);
@@ -462,30 +492,267 @@ body{
         ;
     }
 
+    .fullWebsite{
+        margin: 0%;
+        align-items: center;
+        justify-content: center;
+    }
+
     .bannerFull{
-        background:red;
-        margin: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-    }
-
-    .imgHome{
-        padding: 0;
-        background: blue;
-        width: 100vh;
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        width: 100%;
         margin-left: 0;
-        margin-top: 0;
-    }
-
-    .imgHamburguesaHome{
+        margin-bottom: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         
     }
 
+    .bannerFull h1{
+        margin-top: 10vh;
+        font-size: 3em;
+    }
+
+    .bannerFull h3{
+        margin-top: 2.5vh;
+        font-size: 1.5em;
+        text-align: center;
+    }
+
+    .bannerFull .btnTodaysMenu{
+        width: 15vh;
+        font-size: 1em;
+    }
+
+    .imgHome{
+        align-items: center;
+        justify-content: center;
+    }
+
+    .imgHamburguesaHome{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 0;
+        margin-left: 0;
+    }
+
+    .imgHamburguesaHome img{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 80%;
+        height: 80%;
+        margin-top: 0;
+        margin-left: 0;
+        margin-bottom: 10vh;
+    }
+
+    .aboutUsPage{
+        height: 100vh;
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(2, 1fr);
+        grid-template-areas: 
+        "banner"
+        "aboutUs"
+        ;
+    }
+    .img_aboutUs{
+        height: 60vh;
+        width: 100%;
+        grid-area: aboutUs;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .banner_aboutUs{
+        height: 40vh;
+        margin-right: 0;
+        grid-area: banner;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .img_aboutUs img{
+        margin-left: 0;
+        width: 70%;
+        height: 70%;
+    }
+
+
+    .box_aboutUs{
+        width: 40vh;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        margin-right: 0;
+    }
+
+    .box_aboutUs h4{
+        font-size: 1.2em;
+    }
+
+    .box_aboutUs h1{
+        font-size: 2.3em;
+    }
+
+    .box_aboutUs h3{
+        font-size: 1em;
+        margin-top: 1vh;
+        margin-bottom: 4vh;
+    }
+
+    
+    /* MENU PAGE PHONE */
+
+    .foodMenuPage{
+        height: 170vh;
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(2, 1fr);
+        grid-template-areas: 
+        "bannerMenu"
+        "boxesMenu"
+        ;
+    }
+
+    .banner_foodMenu{
+        border: 1px solid white;
+        text-align: center;
+        margin-bottom: 2vh;
+        width: 100%;
+    }
+
+    .banner_foodMenu h3{
+        font-size: 1.2em;
+    }
+
+    .banner_foodMenu h1{
+        font-size: 2.5em;
+        width: 100%;
+    }
+
+    .boxes_foodMenu{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .box_foodMenu{
+        width: 70%;
+        height: 80%;
+    }
+    
+
+    /* SERVICES PAGE */
+    .servicesPage{
+        margin-top: 0;
+        padding-top: 0;
+        height: 200vh;
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(4, 1fr);
+        grid-template-areas: 
+        "services"
+        "box"
+        "box"
+        "box"
+        ;
+        text-align: center;
+    }
+
+    .banner_service{
+        height: 50vh;
+        width: 50vh;
+    }
+
+    .banner_service h3{
+        font-size: 1.4em;
+    }
+
+    .banner_service h1{
+        font-size: 2em;
+        width: 100%;
+    }
+    .boxes_services{
+        margin-left: 0;
+        padding-left: 0;
+        width: 100%;
+        height: 150vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .box_services{
+        margin-left: 0;
+        padding-left: 0;
+        width: 100%;
+        grid-area: boxPhone;
+    }
+    
+    .box_services img{
+        width: 50%;
+        height: 50%;
+    }
+
+    .box_services h4{
+        width: 80%;
+        font-size: 1em;
+    }
+
+    /* CONTACT PAGE PHONE */
+
+    .contactPage{
+        height: 50vh;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+        grid-template-areas: 
+        "contact"
+        ;
+    }
+
+    .box_contact{
+        grid-area: contact;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-right: 0;
+    }
+    
+    .banner_contact{
+        margin-top: 0;
+        padding-top: 0;
+        background: var(--color-quinto);
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        width: 80%;
+        height: 50%;
+    }
+
+    .banner_contact h1{
+        font-size: 1.5em;
+    }
+
+    .banner_contact button{
+        width: 35%;
+        font-size: 1em;
+    }
+
+    .footer{
+        display: flex;
+        flex-direction: column;
+        padding: 7vh;
+    }
+    .menufooter ul li{
+        margin: 10px;
+    }
+
+    .box_footer:nth-child(4){
+        align-items: center;
+    }
 }
 
