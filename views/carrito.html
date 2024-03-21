@@ -14,19 +14,34 @@
 
             <div class="menu_campusShop">
                 <ul>
-                    <li><a href="./index.html">Todos los productos</a></li>
-                    <li><a href="/views/abrigos.html">Abrigos</a></li>
-                    <li><a href="/views/camisetas.html">Camisetas</a></li>
-                    <li><a href="/views/pantalones.html">Pantalones</a></li>
+                    <li>
+                        <i class='bx bx-closet'></i>
+                        <a href="/index.html">Todos los productos</a>
+                    </li>
+                    <li>
+                        <i class='bx bx-closet'></i>
+                        <a href="/views/abrigos.html">Abrigos</a>
+                    </li>
+                    <li>
+                        <i class='bx bx-closet'></i>
+                        <a href="/views/camisetas.html">Camisetas</a>
+                    </li>
+                    <li>
+                        <i class='bx bx-closet'></i>
+                        <a href="/views/pantalones.html">Pantalones</a>
+                    </li>
                 </ul>
             </div>
 
             <div class="carritos_campusShop">
-                <a href="css/carrito.css">Carritos</a>
+                <div class="text_carritos">
+                    <i class='bx bx-cart'></i>
+                    <a href="/views/carrito.html">Carritos</a>
+                </div>
                 <button class="btn_carritos">3</button>
             </div>
 
-            <h4>2023 Campus</h4>
+            <h4>© 2023 Campus</h4>
         </section>
         <section class="contenedor_items">
             <div class="all_products">
@@ -37,7 +52,7 @@
                 <div class="contenedor_imagenes">
                     <div class="boxImg">
                         <div class="cont_img">
-                            <img src="/storage/img/abrigo1.png">
+                            <img src="/storage/img/pantalon1.png">
                         </div>
                         <div class="text_nombre">
                             <h3>Nombre</h3>
@@ -45,15 +60,15 @@
                         </div>
                         <div class="text_cantidad">
                             <h3>Cantidad</h3>
-                            <div class="box_cantidad">2</div>
+                            <input type="number" name="cantidad" min="1" max="100" placeholder="2">
                         </div>
                         <div class="text_precio">
                             <h3>Precio</h3>
-                            <h4>$ 1.000</h4>
+                            <h4>$ 2.000</h4>
                         </div>
                         <div class="text_subtotal">
                             <h3>Subtotal</h3>
-                            <h4>$ 2.000</h4>
+                            <h4>$ 4.000</h4>
                         </div>
                         <div class="delete_icon">
                             <i class='bx bx-x'></i>
@@ -65,12 +80,12 @@
                             <img src="/storage/img/abrigo2.png">
                         </div>
                         <div class="text_nombre">
-                            <h3>Abrigo 01</h3>
-                            <h4>$1.000</h4>
+                            <h3>Nombre</h3>
+                            <h4>Abrigo 02</h4>
                         </div>
                         <div class="text_cantidad">
                             <h3>Cantidad</h3>
-                            <div class="box_cantidad">2</div>
+                            <input type="number" name="cantidad" min="1" max="100" placeholder="2">
                         </div>
                         <div class="text_precio">
                             <h3>Precio</h3>
@@ -81,31 +96,50 @@
                             <h4>$ 2.000</h4>
                         </div>
                         <div class="delete_icon">
-                            <i class='bx bx-x'></i>
+                            <a href="/views/carritoLleno.html">
+                                <i class='bx bx-x'></i>
+                            </a>
                         </div>
                     </div>
                     <div class="boxImg">
                         <div class="cont_img">
-                            <img src="/storage/img/abrigo3.png">
+                            <img src="/storage/img/camiseta3.png">
                         </div>
                         <div class="text_nombre">
-                            <h3>Abrigo 01</h3>
-                            <h4>$1.000</h4>
+                            <h3>Nombre</h3>
+                            <h4>Camisetas 03</h4>
                         </div>
                         <div class="text_cantidad">
                             <h3>Cantidad</h3>
-                            <div class="box_cantidad">2</div>
+                            <input type="number" name="cantidad" min="1" max="100" placeholder="1">
                         </div>
                         <div class="text_precio">
                             <h3>Precio</h3>
-                            <h4>$ 1.000</h4>
+                            <h4>$ 2.500</h4>
                         </div>
                         <div class="text_subtotal">
                             <h3>Subtotal</h3>
-                            <h4>$ 2.000</h4>
+                            <h4>$ 2.500</h4>
                         </div>
                         <div class="delete_icon">
-                            <i class='bx bx-x'></i>
+                            <a href="/views/carritoLleno.html">
+                                <i class='bx bx-x'></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="box_carrito">
+                    <div class="btn_vaciar">
+                        <button><a href="/views/carritoVacio.html">Vaciar Carrito</a></button>
+                    </div>
+                    <div class="box_comprar">
+                        <div class="text_total">
+                            <h4>Total</h4>
+                            <h5>$ 8.500</h5>
+                        </div>
+                        <div class="btn_comprar">
+                            <button>Comprar Ahora</button>
                         </div>
                     </div>
                 </div>
