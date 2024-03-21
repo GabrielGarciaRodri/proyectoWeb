@@ -28,8 +28,10 @@ body{
     margin-left: 10vh;
 }
 
-.openMenu{
-    display: none;
+.open{
+    background: var(--color-body);
+    border: none;
+    color: var(--color-body);
 }
 
 
@@ -73,6 +75,8 @@ body{
 }
 
 .fullWebsite{
+    margin-left: 50px;
+    margin-top: 130px;
     grid-area: full;
     display: flex;
     justify-content: center;
@@ -81,6 +85,8 @@ body{
 
 
 .imgHome{
+    
+    margin-top: 70px;
     grid-area: imagenFull;
 }
 
@@ -461,10 +467,6 @@ body{
         width: 100%;
         padding-top: 0;
         position: fixed;
-        
-    }
-    .openMenu{
-        border: 1px solid white;
     }
 
     .titulo_header h1{
@@ -477,6 +479,16 @@ body{
     .menu{
         display: none;
     }
+
+    .open{
+        margin-top: 20px;
+        margin-right: 20px;
+        width: 30px;
+        height: 30px;
+        background: var(--color-primary);
+        border: none;
+    }
+    
 
     /* MAINPAGE PHONE */
     .containerBody{
