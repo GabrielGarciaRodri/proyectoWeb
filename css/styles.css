@@ -20,6 +20,7 @@
 
 /* CONTENEDOR BANNER */
 .campus_shop{
+    color: var(--color-font2);
     height: 100%;
     grid-area: shop;
     display: flex;
@@ -33,9 +34,6 @@
     font-size: 35px;
 }
 
-.menu_campusShop {
-    margin-right: 20px;
-}
 .menu_campusShop ul li{
     list-style: none;
     text-decoration: none;
@@ -45,40 +43,68 @@
 .menu_campusShop ul li a{
     list-style: none;
     text-decoration: none;
-    color: black;
+    color: var(--color-font2);
     font-size: 20px;
+    margin-left: 10px;
+}
+
+.menu_campusShop ul li:nth-child(1){
+    display: flex;
+    align-items: center;
+    width: 230px;
+    height: 30px;
+    border: 2px solid var(--color-font2);
+    border-radius: 5px;
+    background: var(--color-cuarto);
+    font-weight: bold;
 }
 
 .carritos_campusShop{
-    width: 150px;
+    width: 200px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     list-style: none;
-    margin-right: 45px;
+    border-radius: 5px;
+}
+
+.text_carritos{
+    display: flex;
+    align-items: center;
+}
+
+.carritos_campusShop i{
+    font-size: 20px;
+    margin-right: 10px;
 }
 
 .carritos_campusShop a{
-    margin-left: 0;
+    margin-left: 10px;
     font-size: 20px;
     text-decoration: none;
-    color: black;
+    color: var(--color-font2);
 }
 
 .carritos_campusShop .btn_carritos{
     width: 25px;
     height: 30px;
     font-size: 20px;
+    font-weight: bold;
+    border: 2px solid var(--color-body);
+    border-radius: 5px;
+    background: var(--color-button);
+    color: var(--color-font2);
 }
 
 .campus_shop h4{
     margin-bottom: 80px;
-    font-size: 20px;
+    font-size: 18px;
     margin-right: 65px;
 }
 
 /* CONTENEDOR IMAGENES */
 .contenedor_items{
+    color: var(--color-font2);
     height: 100vh;
     grid-area: images;
 
@@ -115,8 +141,8 @@
 
 .boxImg{
     margin: 10px;
-    background-color: white;
-    border-radius: 20px;
+    background: #ffffdd;
+    border-radius: 15px;
 }
 .boxImg img{
     height: 160px;
@@ -127,14 +153,13 @@
 .box_bottom{
     height: 55px;
     border-radius: 10px;
-    border: 1px solid blue;
-    background-color: white;
+    border: 3px solid var(--color-body);
+    background: var(--color-cuarto);
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
     font-family: "Monda", sans-serif;
-
 }
 
 .text_bottom{
@@ -151,10 +176,11 @@
     margin-top: 10px;
     border-radius: 5px;
     border: none;
-    background: blue;
+    background: var(--color-button);
     width: 80px;
     height: 20px;
-    color: white;
+    color: var(--color-font2);
+    font-weight: bold;
 }
 
 

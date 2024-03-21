@@ -47,41 +47,59 @@
     text-decoration: none;
     color: black;
     font-size: 20px;
+    margin-left: 10px;
 }
 
 .menu_campusShop ul li:nth-child(4){
-    border: 2px solid;
+    display: flex;
+    align-items: center;
+    width: 220px;
+    height: 30px;
+    border: 2px solid var(--color-font2);
     border-radius: 5px;
-    width: 200px;
-    position: relative;
+    background: var(--color-cuarto);
+    font-weight: bold;
 }
 
 
 .carritos_campusShop{
-    width: 150px;
+    width: 200px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     list-style: none;
-    margin-right: 45px;
+    margin-right: 50px;
 }
 
-.carritos_campusShop a{
-    margin-left: 0;
+.text_carritos{
+    display: flex;
+    align-items: center;
+}
+.carritos_campusShop i{
     font-size: 20px;
+    margin-right: 10px;
+}
+.carritos_campusShop a{
+    margin-left: 10px;
+    font-size: 22px;
     text-decoration: none;
-    color: black;
+    color: var(--color-font2);
 }
 
 .carritos_campusShop .btn_carritos{
     width: 25px;
     height: 30px;
     font-size: 20px;
+    font-weight: bold;
+    border: 2px solid var(--color-body);
+    border-radius: 5px;
+    background: var(--color-button);
+    color: var(--color-font2);
 }
 
 .campus_shop h4{
-    margin-bottom: 80px;
-    font-size: 20px;
+    margin-bottom: 30px;
+    font-size: 18px;
     margin-right: 65px;
 }
 
@@ -121,7 +139,7 @@
 
 .boxImg{
     margin: 10px;
-    background-color: white;
+    background:var(--color-cuarto);
     border-radius: 20px;
 }
 .boxImg img{
@@ -133,14 +151,13 @@
 .box_bottom{
     height: 70px;
     border-radius: 10px;
-    border: 1px solid blue;
-    background-color: white;
+    border: 2px solid var(--color-body);
+    background: var(--color-cuarto);
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
     font-family: "Monda", sans-serif;
-
 }
 
 .text_bottom{
@@ -157,8 +174,9 @@
     margin-top: 10px;
     border-radius: 5px;
     border: none;
-    background: blue;
+    background: var(--color-button);
     width: 80px;
     height: 20px;
-    color: white;
+    color: var(--color-font2);
+    font-weight: bold;
 }
