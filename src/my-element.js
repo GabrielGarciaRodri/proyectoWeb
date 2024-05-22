@@ -8,7 +8,9 @@ export class MyElement extends LitElement {
     abrigos: { type: Array },
     camisetas: { type: Array },
     pantalones: { type: Array },
+    productos: { type: Array },
     categoriaSeleccionada: { type: String },
+    carrito: { type: Array },
   };
 
   constructor() {
@@ -18,7 +20,7 @@ export class MyElement extends LitElement {
     this.pantalones = [];
     this.categoriaSeleccionada = 'todos';
     this.productos = [];
-    this.data = getAll();
+    this.carrito = [];
   }
 
   connectedCallback() {
@@ -33,6 +35,7 @@ export class MyElement extends LitElement {
     this.pantalones = data.pantalon;
     this.productos = [...this.abrigos, ...this.camisetas, ...this.pantalones];  
   }
+
   cambiarCategoria(categoria) {
 
     this.categoriaSeleccionada = categoria;
@@ -51,6 +54,41 @@ export class MyElement extends LitElement {
     }
     this.requestUpdate();
   }
+
+  agregarAlCarrito(producto) {
+    this.carrito = [...this.carrito, producto];
+    this.requestUpdate();
+  }
+
+  mostrarCarrito(){
+    const contenedorCarrito = this.shadowRoot.querySelector('.contenedor-carrito');
+    contenedorCarrito.style.display = 'block';
+
+    const carritoProductos = this.shadowRoot.querySelector('.carrito-productos');
+    carritoProductos.innerHTML = '';
+
+    this.carrito.forEach(producto => {
+      const nuevoProducto = document.createElement('div');
+      nuevoProducto.classList.add('carrito-producto');
+      nuevoProducto.innerHTML = html`
+        <img class="carrito-producto-imagen" src="${producto.imagen}" alt="${producto.nombre}" />
+        <div>
+          <p>${producto.nombre}</p>
+          <p><small>Precio: ${producto.precio} COP</small></p>
+        </div>
+        <button class="carrito-producto-eliminar" @click=${() => this.eliminarDelCarrito(producto)}>Eliminar</button>
+
+      `;
+      carritoProductos.appendChild(nuevoProducto);
+    });
+  }
+   
+
+  eliminarDelCarrito(producto) {
+    this.carrito = this.carrito.filter(item => item!== producto);
+    this.requestUpdate();
+  }
+
   render() {
     
     return html`
@@ -74,14 +112,14 @@ export class MyElement extends LitElement {
                 <button @click=${() => this.cambiarCategoria('pantalones')} id="pantalones" class="boton-menu boton-categoria ${this.categoriaSeleccionada === 'pantalones' ? 'active' : ''}"><i class="bi bi-hand-index-thumb"></i> Pantalones</button>
               </li>
               <li>
-                <a class="boton-menu boton-carrito" href="#">
-                  <i class="bi bi-cart-fill"></i> Carrito <span id="numerito" class="numerito">0</span>
+                <a class="boton-menu boton-carrito" @click=${() => this.mostrarCarrito()} href= "#">
+                  <i class="bi bi-cart-fill"></i> Carrito <span id="numerito" class="numerito">${this.carrito.length}</span>
                 </a>
               </li>
             </ul>
           </nav>
           <footer>
-            <p class="texto-footer">© 2022 Carpi Coder</p>
+            <p class="texto-footer">© 2024 CampusLands</p>
           </footer>
         </aside>
       <main>
@@ -94,12 +132,25 @@ export class MyElement extends LitElement {
                 <div class="producto-detalles">
                   <p class="producto-titulo">${producto.nombre}</p>
                   <p>${producto.precio} COP</p>
-                  <button class="producto-agregar">Agregar al carrito</button>
+                  <button @click=${() => this.agregarAlCarrito(producto)} class="producto-agregar">Agregar al carrito</button>
                 </div>
               </div>
             `
           )}
         </div>
+        <div class="contenedor-carrito" style="display: none;">
+            <h2>Carrito</h2>
+            <div class="carrito-productos"></div>
+            <div class="carrito-acciones">
+              <button class="carrito-acciones-vaciar" @click=${() => this.carrito = []}>Vaciar Carrito</button>
+              <div class="carrito-acciones-derecha">
+                <div class="carrito-acciones-total">
+                  <p>Total: ${this.carrito.reduce((total, item) => total + item.precio, 0)} COP</p>
+                </div>
+                <button class="carrito-acciones-comprar">Comprar</button>
+              </div>
+            </div>
+          </div>
       </main>
       </div>
     `;
@@ -289,21 +340,95 @@ export class MyElement extends LitElement {
       background-color: var(--clr-main);
       color: var(--clr-white);
     }
+
+    .contenedor-carrito {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    
+    .carrito-vacio,
+    .carrito-comprado {
+      color: var(--clr-main);
+    }
+    
+    .carrito-productos {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    
+    .carrito-producto {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: var(--clr-gray);
+      color: var(--clr-main);
+      padding: .5rem;
+      padding-right: 1.5rem;
+      border-radius: 1rem;
+    }
+    
+    .carrito-producto-imagen {
+      width: 4rem;
+      border-radius: 1rem;
+    }
+    
+    .carrito-producto small {
+      font-size: .75rem;
+    }
+    
+    .carrito-producto-eliminar {
+      border: 0;
+      background-color: transparent;
+      color: var(--clr-red);
+      cursor: pointer;
+    }
+    
+    .carrito-acciones {
+      display: flex;
+      justify-content: space-between;
+    }
+    
+    .carrito-acciones-vaciar {
+      border: 0;
+      background-color: var(--clr-gray);
+      padding: 1rem;
+      border-radius: 1rem;
+      color: var(--clr-main);
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+    
+    .carrito-acciones-derecha {
+      display: flex;
+    }
+    
+    .carrito-acciones-total {
+      display: flex;
+      background-color: var(--clr-gray);
+      padding: 1rem;
+      color: var(--clr-main);
+      text-transform: uppercase;
+      border-top-left-radius: 1rem;
+      border-bottom-left-radius: 1rem;
+      gap: 1rem;
+    }
+    
+    .carrito-acciones-comprar {
+      border: 0;
+      background-color: var(--clr-main);
+      padding: 1rem;
+      color: var(--clr-white);
+      text-transform: uppercase;
+      cursor: pointer;
+      border-top-right-radius: 1rem;
+      border-bottom-right-radius: 1rem;
+    }
+    
   `;
 
-  agregarAlCarrito(producto) {
-    const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-    carrito.push(producto);
-    localStorage.setItem('carrito', JSON.stringify(carrito));
-    const numerito = document.getElementById('numerito');
-    numerito.textContent = carrito.length;
-    numerito.classList.add('active');
-    setTimeout(() => {
-      numerito.classList.remove('active');
-    }, 1000);
-  }
 }
-
 
 
 customElements.define('my-element', MyElement)
