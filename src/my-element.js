@@ -11,6 +11,7 @@ export class MyElement extends LitElement {
     productos: { type: Array },
     categoriaSeleccionada: { type: String },
     carrito: { type: Array },
+    mostrandoCarrito: { type: Boolean }
   };
 
   constructor() {
@@ -21,6 +22,7 @@ export class MyElement extends LitElement {
     this.categoriaSeleccionada = 'todos';
     this.productos = [];
     this.carrito = [];
+    this.mostrandoCarrito = false;
   }
 
   connectedCallback() {
@@ -37,7 +39,7 @@ export class MyElement extends LitElement {
   }
 
   cambiarCategoria(categoria) {
-
+    this.mostrandoCarrito = false;
     this.categoriaSeleccionada = categoria;
     switch (this.categoriaSeleccionada) {
       case 'abrigos':
@@ -61,26 +63,8 @@ export class MyElement extends LitElement {
   }
 
   mostrarCarrito(){
-    const contenedorCarrito = this.shadowRoot.querySelector('.contenedor-carrito');
-    contenedorCarrito.style.display = 'block';
-
-    const carritoProductos = this.shadowRoot.querySelector('.carrito-productos');
-    carritoProductos.innerHTML = '';
-
-    this.carrito.forEach(producto => {
-      const nuevoProducto = document.createElement('div');
-      nuevoProducto.classList.add('carrito-producto');
-      nuevoProducto.innerHTML = html`
-        <img class="carrito-producto-imagen" src="${producto.imagen}" alt="${producto.nombre}" />
-        <div>
-          <p>${producto.nombre}</p>
-          <p><small>Precio: ${producto.precio} COP</small></p>
-        </div>
-        <button class="carrito-producto-eliminar" @click=${() => this.eliminarDelCarrito(producto)}>Eliminar</button>
-
-      `;
-      carritoProductos.appendChild(nuevoProducto);
-    });
+    this.mostrandoCarrito = true;
+    this.requestUpdate();
   }
    
 
@@ -112,7 +96,7 @@ export class MyElement extends LitElement {
                 <button @click=${() => this.cambiarCategoria('pantalones')} id="pantalones" class="boton-menu boton-categoria ${this.categoriaSeleccionada === 'pantalones' ? 'active' : ''}"><i class="bi bi-hand-index-thumb"></i> Pantalones</button>
               </li>
               <li>
-                <a class="boton-menu boton-carrito" @click=${() => this.mostrarCarrito()} href= "#">
+                <a class="boton-menu boton-carrito" @click=${() => this.mostrarCarrito()} >
                   <i class="bi bi-cart-fill"></i> Carrito <span id="numerito" class="numerito">${this.carrito.length}</span>
                 </a>
               </li>
@@ -122,35 +106,58 @@ export class MyElement extends LitElement {
             <p class="texto-footer">© 2024 CampusLands</p>
           </footer>
         </aside>
+        
       <main>
-        <h2 class="titulo-principal" id="titulo-principal">Todos los productos</h2>
-        <div class="contenedor-productos">
-          ${this.productos.map(
-            producto => html`
-              <div class="product">
-                <img class="producto-imagen" src="${producto.imagen}" alt="${producto.nombre}" />
-                <div class="producto-detalles">
-                  <p class="producto-titulo">${producto.nombre}</p>
-                  <p>${producto.precio} COP</p>
-                  <button @click=${() => this.agregarAlCarrito(producto)} class="producto-agregar">Agregar al carrito</button>
+      <!-- APARTADO DEL CARRITO  -->
+      ${this.mostrandoCarrito ? html`
+      <div class="contenedor-carrito">
+        <h2>Carrito</h2>
+        <div class="carrito-productos">
+          ${this.carrito.length === 0
+            ? html`<p class="carrito-vacio">El carrito está vacío</p>`
+            : this.carrito.map(producto => html`
+              <div class="carrito-producto">
+                <img class="carrito-producto-imagen" src="${producto.imagen}" alt="${producto.nombre}" />
+                <div>
+                  <p>${producto.nombre}</p>
+                  <p><small>Precio: ${producto.precio} COP</small></p>
                 </div>
+                <button class="carrito-producto-eliminar" @click=${() => this.eliminarDelCarrito(producto)}>Eliminar</button>
               </div>
-            `
-          )}
+            `)
+          }
         </div>
-        <div class="contenedor-carrito" style="display: none;">
-            <h2>Carrito</h2>
-            <div class="carrito-productos"></div>
-            <div class="carrito-acciones">
-              <button class="carrito-acciones-vaciar" @click=${() => this.carrito = []}>Vaciar Carrito</button>
-              <div class="carrito-acciones-derecha">
-                <div class="carrito-acciones-total">
-                  <p>Total: ${this.carrito.reduce((total, item) => total + item.precio, 0)} COP</p>
-                </div>
-                <button class="carrito-acciones-comprar">Comprar</button>
+
+        <!-- ACCIONES DEL CARRITO -->
+        <div class="carrito-acciones">
+          <button class="carrito-acciones-vaciar" @click=${() => this.carrito = []}>Vaciar Carrito</button>
+          <div class="carrito-acciones-derecha">
+            <div class="carrito-acciones-total">
+              <p>Total: ${this.carrito.reduce((total, item) => total + item.precio, 0)} COP</p>
+            </div>
+            <button class="carrito-acciones-comprar">Comprar</button>
+          </div>
+        </div>
+      </div>
+    ` 
+    //* TODOS LOS PRODUCTOS*//
+    : html`
+      <h2 class="titulo-principal" id="titulo-principal">Todos los productos</h2>
+      <div class="contenedor-productos">
+        ${this.productos.map(
+          producto => html`
+            <div class="product">
+              <img class="producto-imagen" src="${producto.imagen}" alt="${producto.nombre}" />
+              <div class="producto-detalles">
+                <p class="producto-titulo">${producto.nombre}</p>
+                <p>${producto.precio} COP</p>
+                <button @click=${() => this.agregarAlCarrito(producto)} class="producto-agregar">Agregar al carrito</button>
               </div>
             </div>
-          </div>
+          `
+        )}
+      </div>
+    `}
       </main>
       </div>
     `;
@@ -341,94 +348,13 @@ export class MyElement extends LitElement {
       color: var(--clr-white);
     }
 
-    .contenedor-carrito {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-    
-    .carrito-vacio,
-    .carrito-comprado {
-      color: var(--clr-main);
-    }
-    
-    .carrito-productos {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-    
-    .carrito-producto {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background-color: var(--clr-gray);
-      color: var(--clr-main);
-      padding: .5rem;
-      padding-right: 1.5rem;
-      border-radius: 1rem;
-    }
-    
-    .carrito-producto-imagen {
-      width: 4rem;
-      border-radius: 1rem;
-    }
-    
-    .carrito-producto small {
-      font-size: .75rem;
-    }
-    
-    .carrito-producto-eliminar {
-      border: 0;
-      background-color: transparent;
-      color: var(--clr-red);
-      cursor: pointer;
-    }
-    
-    .carrito-acciones {
-      display: flex;
-      justify-content: space-between;
-    }
-    
-    .carrito-acciones-vaciar {
-      border: 0;
-      background-color: var(--clr-gray);
-      padding: 1rem;
-      border-radius: 1rem;
-      color: var(--clr-main);
-      text-transform: uppercase;
-      cursor: pointer;
-    }
-    
-    .carrito-acciones-derecha {
-      display: flex;
-    }
-    
-    .carrito-acciones-total {
-      display: flex;
-      background-color: var(--clr-gray);
-      padding: 1rem;
-      color: var(--clr-main);
-      text-transform: uppercase;
-      border-top-left-radius: 1rem;
-      border-bottom-left-radius: 1rem;
-      gap: 1rem;
-    }
-    
-    .carrito-acciones-comprar {
-      border: 0;
-      background-color: var(--clr-main);
-      padding: 1rem;
-      color: var(--clr-white);
-      text-transform: uppercase;
-      cursor: pointer;
-      border-top-right-radius: 1rem;
-      border-bottom-right-radius: 1rem;
-    }
-    
+
   `;
 
 }
+
+
+
 
 
 customElements.define('my-element', MyElement)
