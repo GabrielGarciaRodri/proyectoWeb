@@ -74,30 +74,32 @@ export class MyElement extends LitElement {
   }
 
   render() {
-    
     return html`
-      <div class="wrapper">
+      <div class="wrapper ${this.menuAbierto ? 'menu-abierto' : ''}">
         <aside>
           <header>
             <h1 class="logo">CampusLands</h1>
+            <button class="open-menu" @click="${this.toggleMenu}">
+              <i class="bi bi-list"></i>
+            </button>
           </header>
           <nav>
             <ul class="menu">
               <li>
-                <button @click=${() => this.cambiarCategoria('todos')} id="todos" class="boton-menu boton-categoria ${this.categoriaSeleccionada === 'todos' ? 'active' : ''}"><i class='bx bxs-hand-right'></i>Todos los productos</button>
+                <button @click=${() => this.cambiarCategoria('todos')} id="todos" class="boton-menu boton-categoria ${this.categoriaSeleccionada === 'todos' ? 'active' : ''}">Todos los productos</button>
               </li>
               <li>
-                <button @click=${() => this.cambiarCategoria('abrigos')} id="abrigos" class="boton-menu boton-categoria ${this.categoriaSeleccionada === 'abrigos' ? 'active' : ''}"><i class="bi bi-hand-index-thumb"></i> Abrigos</button>
+                <button @click=${() => this.cambiarCategoria('abrigos')} id="abrigos" class="boton-menu boton-categoria ${this.categoriaSeleccionada === 'abrigos' ? 'active' : ''}"> Abrigos</button>
               </li>
               <li>
-                <button @click=${() => this.cambiarCategoria('camisetas')} id="camisetas" class="boton-menu boton-categoria ${this.categoriaSeleccionada === 'camisetas' ? 'active' : ''}"><i class="bi bi-hand-index-thumb"></i> Camisetas</button>
+                <button @click=${() => this.cambiarCategoria('camisetas')} id="camisetas" class="boton-menu boton-categoria ${this.categoriaSeleccionada === 'camisetas' ? 'active' : ''}"> Camisetas</button>
               </li>
               <li>
-                <button @click=${() => this.cambiarCategoria('pantalones')} id="pantalones" class="boton-menu boton-categoria ${this.categoriaSeleccionada === 'pantalones' ? 'active' : ''}"><i class="bi bi-hand-index-thumb"></i> Pantalones</button>
+                <button @click=${() => this.cambiarCategoria('pantalones')} id="pantalones" class="boton-menu boton-categoria ${this.categoriaSeleccionada === 'pantalones' ? 'active' : ''}">Pantalones</button>
               </li>
               <li>
                 <a class="boton-menu boton-carrito" @click=${() => this.mostrarCarrito()} >
-                  <i class="bi bi-cart-fill"></i> Carrito <span id="numerito" class="numerito">${this.carrito.length}</span>
+                <box-icon type='solid' name='cart'></box-icon> Carrito <span id="numerito" class="numerito">${this.carrito.length}</span>
                 </a>
               </li>
             </ul>
@@ -107,61 +109,68 @@ export class MyElement extends LitElement {
           </footer>
         </aside>
         
-      <main>
-      <!-- APARTADO DEL CARRITO  -->
-      ${this.mostrandoCarrito ? html`
-      <div class="contenedor-carrito">
-        <h2>Carrito</h2>
-        <div class="carrito-productos">
-          ${this.carrito.length === 0
-            ? html`<p class="carrito-vacio">El carrito está vacío</p>`
-            : this.carrito.map(producto => html`
-              <div class="carrito-producto">
-                <img class="carrito-producto-imagen" src="${producto.imagen}" alt="${producto.nombre}" />
-                <div>
-                  <p>${producto.nombre}</p>
-                  <p><small>Precio: ${producto.precio} COP</small></p>
+        <main class="main-container">
+          <!-- APARTADO DEL CARRITO  -->
+          ${this.mostrandoCarrito ? html`
+            <div class="contenedor-carrito">
+              <h2>Carrito</h2>
+              <div class="carrito-productos">
+                ${this.carrito.length === 0
+                  ? html`<p class="carrito-vacio">El carrito está vacío</p>`
+                  : this.carrito.map(producto => html`
+                      <div class="carrito-producto">
+                        <img class="carrito-producto-imagen" src="${producto.imagen}" alt="${producto.nombre}" />
+                        <div>
+                          <p>${producto.nombre}</p>
+                          <p><small>Precio: ${producto.precio} COP</small></p>
+                        </div>
+                        <button class="carrito-producto-eliminar" @click=${() => this.eliminarDelCarrito(producto)}>Eliminar</button>
+                      </div>
+                    `)
+                }
+              </div>
+              <!-- ACCIONES DEL CARRITO -->
+              <div class="carrito-acciones">
+                <button class="carrito-acciones-vaciar" @click=${() => this.carrito = []}>Vaciar Carrito</button>
+                <div class="carrito-acciones-derecha">
+                  <div class="carrito-acciones-total">
+                    <p>Total: ${this.carrito.reduce((total, item) => total + item.precio, 0)} COP</p>
+                  </div>
+                  <button class="carrito-acciones-comprar">Comprar</button>
                 </div>
-                <button class="carrito-producto-eliminar" @click=${() => this.eliminarDelCarrito(producto)}>Eliminar</button>
-              </div>
-            `)
-          }
-        </div>
-
-        <!-- ACCIONES DEL CARRITO -->
-        <div class="carrito-acciones">
-          <button class="carrito-acciones-vaciar" @click=${() => this.carrito = []}>Vaciar Carrito</button>
-          <div class="carrito-acciones-derecha">
-            <div class="carrito-acciones-total">
-              <p>Total: ${this.carrito.reduce((total, item) => total + item.precio, 0)} COP</p>
-            </div>
-            <button class="carrito-acciones-comprar">Comprar</button>
-          </div>
-        </div>
-      </div>
-    ` 
-    //* TODOS LOS PRODUCTOS*//
-    : html`
-      <h2 class="titulo-principal" id="titulo-principal">Todos los productos</h2>
-      <div class="contenedor-productos">
-        ${this.productos.map(
-          producto => html`
-            <div class="product">
-              <img class="producto-imagen" src="${producto.imagen}" alt="${producto.nombre}" />
-              <div class="producto-detalles">
-                <p class="producto-titulo">${producto.nombre}</p>
-                <p>${producto.precio} COP</p>
-                <button @click=${() => this.agregarAlCarrito(producto)} class="producto-agregar">Agregar al carrito</button>
               </div>
             </div>
-          `
-        )}
-      </div>
-    `}
-      </main>
+          ` 
+          //* TODOS LOS PRODUCTOS*//
+          : html`
+            <h2 class="titulo-principal" id="titulo-principal">Todos los productos</h2>
+            <div class="contenedor-productos">
+              ${this.productos.slice(0, this.productosVisibles).map(
+                producto => html`
+                  <div class="product">
+                    <img class="producto-imagen" src="${producto.imagen}" alt="${producto.nombre}" />
+                    <div class="producto-detalles">
+                      <p class="producto-titulo">${producto.nombre}</p>
+                      <p>${producto.precio} COP</p>
+                      <button @click=${() => this.agregarAlCarrito(producto)} class="producto-agregar">Agregar al carrito</button>
+                    </div>
+                  </div>
+                `
+              )}
+            </div>
+            <!-- Botón para ver más productos -->
+            ${this.productosVisibles < this.productos.length 
+              ? html`
+                <button class="ver-mas" @click="${this.mostrarMasProductos}">
+                  Ver más
+                  <i class="bi bi-arrow-down"></i>
+                </button>`
+              : ''}
+          `}
+        </main>
       </div>
     `;
-    }
+  }
 
 
     static styles = css`
@@ -203,7 +212,10 @@ export class MyElement extends LitElement {
       font-weight: 400;
       font-size: 1.3rem;
     }
-  
+    
+    .box-icon {
+      color: var(--clr-white);
+    }
     .menu {
       display: flex;
       flex-direction: column;
@@ -423,6 +435,114 @@ export class MyElement extends LitElement {
       border-bottom-right-radius: 1rem;
     }
 
+    @media screen and (max-width: 850px) {
+      .contenedor-productos {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+    }
+      
+    @media screen and (max-width: 675px) {
+      .contenedor-productos {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+      
+    @media screen and (max-width: 600px) {
+      .wrapper {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      aside {
+        position: fixed;
+        z-index: 9;
+        background-color: var(--clr-main);
+        left: 0;
+        box-shadow: 0 0 0 100vmax rgba(0, 0, 0, .75);
+        transform: translateX(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: .2s;
+      }
+      
+      .aside-visible {
+        transform: translateX(0);
+        opacity: 1;
+        visibility: visible;
+      }
+      
+      .boton-menu.active::before,
+      .boton-menu.active::after {
+        display: none;
+      }
+      
+      main {
+        margin: 1rem;
+        margin-top: 0;
+        padding: 2rem;
+      }
+      
+      .contenedor-productos {
+        grid-template-columns: 1fr 1fr;
+      }
+      
+      .header-mobile {
+        padding: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      
+      .header-mobile .logo {
+        color: var(--clr-gray);
+      }
+      
+      .open-menu, .close-menu {
+        background-color: transparent;
+        color: var(--clr-gray);
+        border: 0;
+        font-size: 2rem;
+        cursor: pointer;
+      }
+      
+      .close-menu {
+        display: block;
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+      }
+      
+      .carrito-producto {
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        padding: .5rem;
+      }
+      
+      .carrito-producto-subtotal {
+        display: none;
+      }
+      
+      .carrito-acciones {
+        flex-wrap: wrap;
+        row-gap: 1rem;
+      }
+      }
+      
+    @media screen and (max-width: 480px) {
+      .contenedor-productos {
+        grid-template-columns: 1fr;
+      }
+
+      .menu{
+        display: none
+      }
+
+      .menu.active{
+        display: block;
+      }
+    }
   `;
 
 }
